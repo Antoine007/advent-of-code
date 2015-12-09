@@ -19,11 +19,9 @@ function mine(secretKey){
   for(var i=0; i < 9999999999999999; i++ ){
     decodedShizzle = decoded(secretKey + i.toString())
     if (isAdventCoin(decodedShizzle)){
-      var result = i
-      i = 9999999999999999
+      return i;
     }
   }
-  return result
 };
 
 function decoded(input){

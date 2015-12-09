@@ -9,19 +9,28 @@ function neededPaper(l,w,h){
   min = Math.min(side1,side2,side3) / 2
   return  side1 + side2 + side3 + min
 };
-// console.log(neededPaper(3,11,24))
+
+function neededRibbon(l,w,h){
+  l = parseInt(l, 10);
+  w = parseInt(w, 10);
+  h = parseInt(h, 10);
+  max = Math.max(l,w,h);
+  wrap = l+l+w+w+h+h-max-max;
+  bow = l*w*h;
+  return  wrap + bow
+};
 
 function totalPaper(parcels){
-  var result =0
+  var paper = 0;
+  var ribbon = 0;
   for(var i = 0; i < (parcels.length -1); i++) {
-      // console.log(parcels[i])
       l = parcels[i].match(/\d+/)[0]
       w = parcels[i].match(/\d+x(\d+)/)[1]
       h = parcels[i].match(/\d+x\d+x(\d+)/)[1]
-      result = result + neededPaper(l,w,h)
-      // console.log(result)
+      paper += neededPaper(l,w,h);
+      ribbon += neededRibbon(l,w,h);
   }
-  return result
+  return [paper,ribbon]
 };
 
 console.log(totalPaper(parcels))

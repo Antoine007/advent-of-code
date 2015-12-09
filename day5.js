@@ -17,11 +17,9 @@ function killTheNaughty(allstrings){
 function doubleLetter(thestring){
   for(var j=0; j < (thestring.length - 1); j++){
     if (thestring.substr(j,1) == thestring.substr(j+1,1)){
-      var result = true;
-      break
+      return true
     }
   }
-  return result || false;
 };
 
 function countVowels(string){
