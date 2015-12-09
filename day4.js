@@ -30,7 +30,8 @@ function decoded(input){
 
 function isAdventCoin(decoded){
   // console.log(decoded.substr(0,5))
-  if(decoded.substr(0,5) == "00000"){
+  if(decoded.substr(0,6) == "000000"){      //comment this line in or out for part 1 or 2
+  // if(decoded.substr(0,5) == "00000"){
     return true
   }else{
     return false
