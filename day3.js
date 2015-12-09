@@ -37,3 +37,32 @@ function calculator(input){
 };
 
 console.log(calculator(input).length)
+
+
+function robo_calculator(input){
+
+  var beenthere = [ [0,0] ];
+  position = [0,0];
+  robo_position = [0,0];
+
+  for(var i = 0; i< (input.length - 1); i++){
+    if(i%2 !== 0 ){
+      position = santaPosition(position[0],position[1],input[i]);
+      for(var j = 0; j < beenthere.length; j++){
+        visited = [beenthere[j][0],beenthere[j][1]]
+        if( visited[0]==position[0] && visited[1]==position[1] ) break;
+        if( j === (beenthere.length - 1) ) beenthere.push(position);
+      }
+    }else{
+      robo_position = santaPosition(robo_position[0],robo_position[1],input[i]);
+      for(var j = 0; j < beenthere.length; j++){
+        visited = [beenthere[j][0],beenthere[j][1]]
+        if( visited[0]==robo_position[0] && visited[1]==robo_position[1] ) break;
+        if( j === (beenthere.length - 1) ) beenthere.push(robo_position);
+      }
+    }
+  }
+  return beenthere
+};
+
+console.log(robo_calculator(input).length)
