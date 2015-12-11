@@ -1,7 +1,6 @@
 var fs = require('fs');
 var input = fs.readFileSync('day6.txt').toString()
 var allstrings = input.split("\n");
-
 // console.log(allstrings)
 
 function gridMaker(){
@@ -16,7 +15,6 @@ function gridMaker(){
   return grid;
 }
 gridMaker();
-// console.log(grid)
 
 function gridIterator(x,y,p,q,to_do){
   // if (y>q) console.log("error",y,q,"y");
@@ -76,13 +74,12 @@ function lightShow(allstrings){
 }
 
 function countOnes(){
-  lightShow(["turn on 998,998 through 999,999","toggle 998,998 through 999,999","toggle 998,998 through 999,999", "turn off 998,998 through 999,999", "turn on 499,499 through 999,999", ""]);
-  lightShow(allstrings);
-  // console.log(grid)
+  // lightShow(["turn on 998,998 through 999,999","toggle 998,998 through 999,999","toggle 998,998 through 999,999", "turn on 0,0 through 999,999", "toggle 0,999 through 999,999", ""]);
+  // lightShow(allstrings);
   result = 0;
   for(var i = 0; i < 1000; i++) {
     for(var j = 0; j < 1000; j++) {
-      if(grid[i][j]==1) result+=1;
+      if(grid[i][j]===1) result+=1;
     }
   }
   return result;
