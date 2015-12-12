@@ -46,20 +46,21 @@ function gridIterator(x,y,p,q,to_do){
 }
 
 function instructions(string){
-  instruction = string.match(/^[ a-z]+/)[0]
-  x = string.match(/(\d+)/)[1]
-  y = string.match(/[a-z0-9],(\d+)/)[1]
-  p = string.match(/([0-9]+),[0-9]+$/)[1]
-  q = string.match(/[0-9]+$/)[0]
+  var parsed = string.match(/(.*) (\d+),(\d+) through (\d+),(\d+)/);
+  instruction = parsed[1]
+  x = Math.min(parsed[2],parsed[4])
+  y = Math.min(parsed[3],parsed[5])
+  p = Math.max(parsed[2],parsed[4])
+  q = Math.max(parsed[3],parsed[5])
   return [instruction,x,y,p,q]
 }
 
 function OnOffSwitch(instructions){
-  if(instructions[0] == "toggle "){
+  if(instructions[0] == "toggle"){
     gridIterator(instructions[1],instructions[2],instructions[3],instructions[4],"switch")
-  } else if(instructions[0] == "turn off "){
+  } else if(instructions[0] == "turn off"){
     gridIterator(instructions[1],instructions[2],instructions[3],instructions[4],0)
-  } else if(instructions[0] == "turn on "){
+  } else if(instructions[0] == "turn on"){
     gridIterator(instructions[1],instructions[2],instructions[3],instructions[4],1)
   } else{console.log('error1')}
   return grid;
@@ -74,8 +75,8 @@ function lightShow(allstrings){
 }
 
 function countOnes(){
-  // lightShow(["turn on 998,998 through 999,999","toggle 998,998 through 999,999","toggle 998,998 through 999,999", "turn on 0,0 through 999,999", "toggle 0,999 through 999,999", ""]);
-  // lightShow(allstrings);
+  // lightShow(["turn on 998,998 through 999,999","toggle 998,998 through 999,999","toggle 998,998 through 999,999", "turn off 0,0 through 999,999", "toggle 0,999 through 999,999", ""]);
+  lightShow(allstrings);
   result = 0;
   for(var i = 0; i < 1000; i++) {
     for(var j = 0; j < 1000; j++) {
