@@ -4,6 +4,7 @@ var allstrings = input.split("\n");
 
 console.log(allstrings)
 
+var parsed = string.match(/(.*) (\d+),(\d+) through (\d+),(\d+)/);
 
 function instructions(string){
   instruction = string.match(/[a-z]$/)[0]

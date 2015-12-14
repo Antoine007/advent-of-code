@@ -3,6 +3,9 @@ var input = fs.readFileSync('day6.txt').toString()
 var allstrings = input.split("\n");
 // console.log(allstrings)
 
+var express = require('express');
+var app     = express();
+
 function gridMaker(){
   grid = [];
   for(var i = 0; i < 1000; i++) {
@@ -17,26 +20,37 @@ function gridMaker(){
 gridMaker();
 
 function gridIterator(x,y,p,q,to_do){
-  // if (y>q) console.log("error",y,q,"y");
-  // if(x>p)console.log("error", x,p,"x" );
   for(var i = y; i <= q; i++) {
     for(var j = x; j <= p; j++) {
       if(to_do==1){
-        // console.log("On")
         grid[i][j]=1;
       }else if(to_do==0){
-        // console.log("Off")
         grid[i][j]=0;
       }else if(to_do=="switch"){
 
         if(grid[i][j]==0){
-          // console.log("ToggleOn")
           grid[i][j]=1;
         }else{
-          // console.log("ToggleOff")
           grid[i][j]=0;
         }
 
+      }else{
+        console.log('error')
+      }
+    }
+  }
+  return grid;
+}
+
+function gridIteratorTwo(x,y,p,q,to_do){
+  for(var i = y; i <= q; i++) {
+    for(var j = x; j <= p; j++) {
+      if(to_do==1){
+        grid[i][j]+=1;
+      }else if(to_do==0){
+        if(grid[i][j] > 0 ) grid[i][j]-=1;
+      }else if(to_do=="switch"){
+        grid[i][j]+=2;
       }else{
         console.log('error')
       }
@@ -57,11 +71,11 @@ function instructions(string){
 
 function OnOffSwitch(instructions){
   if(instructions[0] == "toggle"){
-    gridIterator(instructions[1],instructions[2],instructions[3],instructions[4],"switch")
+    gridIteratorTwo(instructions[1],instructions[2],instructions[3],instructions[4],"switch") //add or remove Two according to part of the problem
   } else if(instructions[0] == "turn off"){
-    gridIterator(instructions[1],instructions[2],instructions[3],instructions[4],0)
+    gridIteratorTwo(instructions[1],instructions[2],instructions[3],instructions[4],0)
   } else if(instructions[0] == "turn on"){
-    gridIterator(instructions[1],instructions[2],instructions[3],instructions[4],1)
+    gridIteratorTwo(instructions[1],instructions[2],instructions[3],instructions[4],1)
   } else{console.log('error1')}
   return grid;
 }
@@ -77,13 +91,18 @@ function lightShow(allstrings){
 function countOnes(){
   // lightShow(["turn on 998,998 through 999,999","toggle 998,998 through 999,999","toggle 998,998 through 999,999", "turn off 0,0 through 999,999", "toggle 0,999 through 999,999", ""]);
   lightShow(allstrings);
+
   result = 0;
   for(var i = 0; i < 1000; i++) {
     for(var j = 0; j < 1000; j++) {
-      if(grid[i][j]===1) result+=1;
+      // if(grid[i][j]===1) result+=1;          // Switch accoding to part of the problem
+      result += grid[i][j]
     }
   }
   return result;
+
 }
 
 console.log(countOnes())
+
+// http://codepen.io/anon/pen/OMyrjr   Data visualization
