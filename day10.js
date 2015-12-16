@@ -3,7 +3,7 @@ var input = "1113122113"
 
 
 function elvish() {
-  for (var z=0; z<40; z++){
+  for (var z=0; z<50; z++){
     if (z !== 0) input = result;
     var result = ""
     for(var i = 0; i < input.length; i++){
